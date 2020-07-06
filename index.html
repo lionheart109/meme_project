@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeGen</title>
+    <script src="https://kit.fontawesome.com/db70784c3b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="flex flex-column" onload="init()">
+    <!-- header -->
+    <header class="flex align-items-center justify-content-between container main-header">
+       <a href="index.html"> <img src="icons/logo/logo-small.png" class="logo" /></a>
+        <ul class="flex justify-content-between align-items-center clean-list main-nav">
+            <li class="flex align-items-center" onclick="onGalleryNavBtnClick(this)">Gallery</li>
+            <div class="seperator"></div>
+            <li class="flex align-items-center" onclick="onAboutNavBtnClick(this)"><a href="#about">About</a></li>
+        </ul>
+    </header>
+
+    <!-- main -->
+    <main class="flex flex-column flex-grow-1 main-content">
+        
+        <!-- Gallery start -->
+        <div class="flex flex-column gallery-container">
+            <section class="flex flex-wrap container align-items-center gallery-search-nav-container">
+                <input type="text" class="gallery-search-input" placeholder="Enter search keyword">
+                <section class="flex flex-grow-1 gallery-keywords-container">
+                    <div class="flex justify-content-between gallery-keywords">
+                    </div>
+                   <!--  <button class="gallery-more-btn">More...</button> -->
+                </section>
+            </section>
+            <section class="grid images-grid container images-gallery"></section>
+        </div>
+        <!-- Gallery end -->
+
+        <!-- Editor start (hidden as default)-->
+        <section class="container flex-grow-1 flex-wrap align-items-center justify-content-around editor-container">
+            <!-- canvas -->
+            <canvas class="canvas" id="canvas" height="500" width="500" onmousedown="onCanvasMouseDown(event)"></canvas>
+            <!-- meme settings -->
+            <section class="flex flex-column align-items-center justify-content-start settings-container">
+                <input class="text-line-input" type="text" id="text-line-input"
+                    onkeyup="onTextLineInputChange(this.value)">
+                <!-- line positioning -->
+                <div class="flex row-position-btns-container">
+                    <!-- <button class="move-line-up-btn" onclick="onLineHeightChange(-1)">Move line up</button>
+                    <button class="move-line-down-btn" onclick="onLineHeightChange(1)">Move line down</button> -->
+                    <button class="editor-icon change-line-btn" onclick="onChangeLine()"></button>
+                    <button class="editor-icon add-line-btn" onclick="onAddLine()"></button>
+                    <button class="editor-icon remove-selected-line-btn" onclick="onRemoveSelectedLine()"></button>
+                </div>
+                <!-- text actions -->
+                <div class="flex flex-column text-actions-btns-container">
+                    <!-- text align -->
+                    <div class="flex text-size-align-btns-container">
+                        <button class="editor-icon increase-font-btn" onclick="onFontSizeChange(1)">
+                            <button class="editor-icon decrease-font-btn" onclick="onFontSizeChange(-1)"></button>
+                            <button class="editor-icon text-align-left-btn"
+                                onclick="onTextAlignChange('left')"></button>
+                            <button class="editor-icon text-align-center-btn"
+                                onclick="onTextAlignChange('center')"></button>
+                            <button class="editor-icon text-align-right-btn"
+                                onclick="onTextAlignChange('right')"></button>
+                    </div>
+
+                    <!-- text font decorations -->
+                    <div class="flex text-font-decorations-container">
+                        <select class="text-font-select" name="text-font-select" id="text-font-select"
+                            onchange="onFontFamilyChange(this.value)">
+                            <option value="impact">Impact</option>
+                            <option value="arial" style="font-family:Arial, Helvetica, sans-serif;">Arial</option>
+                        </select>
+
+                        <button class="editor-icon text-stroke-color-btn" onclick="onStrokeColorClick()"></button>
+                        <input type="color" class="text-stroke-color-input" onchange="onStrokeColorChange(this.value)"
+                            hidden>
+
+                        <button class="editor-icon text-font-color-btn" onclick="onFontColorClick()"></button>
+                        <input type="color" class="text-font-color-input" onchange="onFontColorChange(this.value)"
+                            hidden>
+                    </div>
+                </div>
+
+                <!-- stickers -->
+               <!--  <div class="flex flex-grow-3 align-items-center justify-content-center stickers-container">
+                </div>
+ -->
+
+                <!-- socials -->
+                <div class="flex flex-grow-1 align-items-end justify-content-end export-container">
+                   <!--  <button class="export-btn"> --><a class="flex align-items-center justify-content-center export-btn"
+                            href="#" download="" onclick="onDownloadMeme(this)">Download</a><!-- </button> -->
+                    <button class="export-btn share-btn">Share</button>
+                </div>
+                
+            </section>
+        </section>
+        <!-- Editor end-->
+
+        <section class="flex flex-wrap align-items-center justify-content-center container about-container">
+           
+            <section class="flex flex-column align-items-start creator-details-container">
+                <div class="creator-name">yeddhukku</div>
+        
+               
+            </section>
+        </section>
+    </main>
+    <!-- footer -->
+
+    <footer id="about"
+        class="flex flex-column flex-shrink-0 justify-content-center align-items-center container copyrights-container">
+        <img src="icons/logo/logo-small.png" class="flex justify-content-center logo" />
+        <div class="copyright">All rights reserved 2019</div>
+    </footer>
+    <script src="js/service/memeServiceGallery.js"></script>
+    <script src="js/service/memeServiceEditor.js"></script>
+    <script src="js/controller/controller.js"></script>
+</body>
+
+</html>
